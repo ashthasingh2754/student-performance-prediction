@@ -3,26 +3,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# 1. Load the dataset
-data = pd.read_csv("dataset/student_data.csv")
+# 1. Load the new UCI dataset
+data = pd.read_csv("dataset/student-mat.csv", sep=";")
 
 print("Dataset loaded successfully!")
-print(data.head())
+print("Dataset shape:", data.shape)
 
-# 2. Select input features and target
+# 2. Select input features
 X = data[
     [
-        "hours_studied",
-        "attendance",
-        "previous_score",
-        "sleep_hours",
-        "extracurricular"
+        "age",
+        "studytime",
+        "failures",
+        "absences",
+        "G1",
+        "G2"
     ]
 ]
 
-y = data["final_score"]
+# 3. Target variable
+y = data["G3"]
 
-# 3. Split the data into training and testing data
+# 4. Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -33,18 +35,18 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("\nTraining samples:", len(X_train))
 print("Testing samples:", len(X_test))
 
-# 4. Create the Linear Regression model
+# 5. Create the model
 model = LinearRegression()
 
-# 5. Train the model
+# 6. Train the model
 model.fit(X_train, y_train)
 
 print("\nModel training completed!")
 
-# 6. Make predictions
+# 7. Make predictions
 predictions = model.predict(X_test)
 
-# 7. Evaluate the model
+# 8. Evaluate the model
 mae = mean_absolute_error(y_test, predictions)
 mse = mean_squared_error(y_test, predictions)
 r2 = r2_score(y_test, predictions)
@@ -55,11 +57,24 @@ print("Mean Absolute Error:", round(mae, 2))
 print("Mean Squared Error:", round(mse, 2))
 print("R2 Score:", round(r2, 2))
 
-# 8. Test the model with a new student
-new_student = [[6, 90, 78, 7, 1]]
+# 9. Test the model with a new student
+new_student = pd.DataFrame(
+    [[17, 2, 0, 5, 12, 13]],
+    columns=[
+        "age",
+        "studytime",
+        "failures",
+        "absences",
+        "G1",
+        "G2"
+    ]
+)
 
 predicted_score = model.predict(new_student)
 
+
+
 print("\nNew Student Prediction")
 print("----------------------")
-print("Predicted Final Score:", round(predicted_score[0], 2))
+print("Predicted Final Grade (G3):",
+      round(predicted_score[0], 2))

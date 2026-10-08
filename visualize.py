@@ -2,52 +2,51 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load dataset
-data = pd.read_csv("dataset/student_data.csv")
+# Load the UCI Student Performance dataset
+data = pd.read_csv("dataset/student-mat.csv", sep=";")
 
-# Display basic information
 print("Dataset loaded successfully!")
-print(data.describe())
+print("Dataset shape:", data.shape)
 
-# 1. Study Hours vs Final Score
+# 1. Study Time vs Final Grade
 plt.figure(figsize=(8, 5))
 sns.scatterplot(
     data=data,
-    x="hours_studied",
-    y="final_score"
+    x="studytime",
+    y="G3"
 )
 
-plt.title("Study Hours vs Final Score")
-plt.xlabel("Hours Studied")
-plt.ylabel("Final Score")
+plt.title("Study Time vs Final Grade")
+plt.xlabel("Study Time")
+plt.ylabel("Final Grade (G3)")
 plt.tight_layout()
 plt.show()
 
-# 2. Attendance vs Final Score
+# 2. Absences vs Final Grade
 plt.figure(figsize=(8, 5))
 sns.scatterplot(
     data=data,
-    x="attendance",
-    y="final_score"
+    x="absences",
+    y="G3"
 )
 
-plt.title("Attendance vs Final Score")
-plt.xlabel("Attendance (%)")
-plt.ylabel("Final Score")
+plt.title("Absences vs Final Grade")
+plt.xlabel("Number of Absences")
+plt.ylabel("Final Grade (G3)")
 plt.tight_layout()
 plt.show()
 
-# 3. Previous Score vs Final Score
+# 3. Previous Grade (G2) vs Final Grade (G3)
 plt.figure(figsize=(8, 5))
 sns.scatterplot(
     data=data,
-    x="previous_score",
-    y="final_score"
+    x="G2",
+    y="G3"
 )
 
-plt.title("Previous Score vs Final Score")
-plt.xlabel("Previous Score")
-plt.ylabel("Final Score")
+plt.title("Previous Grade (G2) vs Final Grade (G3)")
+plt.xlabel("Second Period Grade (G2)")
+plt.ylabel("Final Grade (G3)")
 plt.tight_layout()
 plt.show()
 
