@@ -40,3 +40,20 @@ student-performance-prediction/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+
+
+## Machine Learning Model Comparison
+
+Three machine learning algorithms were tested using the same training and testing data.
+
+| Model | MAE | MSE | R² Score |
+|---|---:|---:|---:|
+| Linear Regression | 1.33 | 4.46 | 0.78 |
+| Decision Tree | 1.18 | 4.25 | 0.79 |
+| Random Forest | 1.06 | 2.92 | 0.86 |
+
+Random Forest performed best among the three tested models, with the lowest MAE and highest R² score.
+
+### Model Comparison Graph
+
+![Model Comparison Graph](model_comparison.png)
