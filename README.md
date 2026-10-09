@@ -40,7 +40,7 @@ student-performance-prediction/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-
+```
 
 ## Machine Learning Model Comparison
 
