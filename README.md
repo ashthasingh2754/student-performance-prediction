@@ -1,15 +1,19 @@
 # Student Performance Prediction
 
-A Python Machine Learning project that predicts a student's final score based on academic performance data.
+A machine learning project that predicts a student's final academic grade using student performance data.
 
-## Features
+## Project Overview
 
-- Loads student performance data from CSV
-- Preprocesses the dataset
-- Splits data into training and testing sets
-- Trains a Linear Regression model
-- Evaluates model performance
-- Predicts the final score of a new student
+This project uses the UCI Student Performance dataset containing information about 395 students.
+
+A Linear Regression model is trained to predict the final grade (G3) using:
+
+- Age
+- Study time
+- Previous failures
+- Number of absences
+- First period grade (G1)
+- Second period grade (G2)
 
 ## Technologies Used
 
@@ -17,45 +21,22 @@ A Python Machine Learning project that predicts a student's final score based on
 - Pandas
 - NumPy
 - Scikit-learn
-- Machine Learning
-- Linear Regression
+- Matplotlib
+- Seaborn
+- Git & GitHub
 
 ## Project Structure
 
+```text
 student-performance-prediction/
 │
 ├── dataset/
-│   └── student_data.csv
+│   ├── student_data.csv
+│   └── student-mat.csv
 │
 ├── train_model.py
-│
+├── visualize.py
+├── predict.py
 ├── README.md
-│
+├── requirements.txt
 └── .gitignore
-
-## Model Performance
-
-Mean Absolute Error: 0.36
-
-Mean Squared Error: 0.14
-
-R2 Score: 1.0
-
-## Example Prediction
-
-The model predicts a final score of approximately:
-
-82.07
-
-for the sample student provided in the program.
-
-## How to Run
-
-1. Clone the repository.
-2. Open the project in VS Code.
-3. Create and activate a Python virtual environment.
-4. Install the required libraries.
-5. Run:
-
-```bash
-python train_model.py
