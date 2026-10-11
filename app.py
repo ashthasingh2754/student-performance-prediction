@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -75,6 +76,11 @@ def load_model():
 
 
 model, features, metrics = load_model()
+
+# Store prediction history for the current session
+if "prediction_history" not in st.session_state:
+    st.session_state.prediction_history = []
+
 
 # ==========================================
 # 3. APPLICATION HEADER
@@ -243,8 +249,20 @@ if submitted:
 
     prediction = float(model.predict(student)[0])
 
-    # Keep displayed grade within the dataset's 0–20 scale
+    # Keep the predicted grade within the 0–20 scale
     prediction = max(0.0, min(20.0, prediction))
+
+    # Record this prediction
+    st.session_state.prediction_history.append({
+        "Time": datetime.now().strftime("%H:%M:%S"),
+        "Age": age,
+        "Study Time": studytime,
+        "Failures": failures,
+        "Absences": absences,
+        "G1": G1,
+        "G2": G2,
+        "Predicted G3": round(prediction, 2)
+    })
 
     st.divider()
     st.subheader("🎯 Prediction Result")
@@ -255,18 +273,15 @@ if submitted:
     )
 
     if prediction >= 10:
-        st.success(
-            "The predicted grade is 10 or above."
-        )
+        st.success("The predicted grade is 10 or above.")
     else:
-        st.warning(
-            "The predicted grade is below 10."
-        )
+        st.warning("The predicted grade is below 10.")
 
     st.caption(
         "This is an educational estimate, not a guarantee "
         "of the student's actual final grade."
     )
+
 
 # ==========================================
 # 7. FOOTER
@@ -277,3 +292,29 @@ st.caption(
     "Student Performance Prediction | "
     "Python • Pandas • Scikit-learn • Streamlit"
 )
+
+
+# ==========================================
+# 8. PREDICTION HISTORY
+# ==========================================
+st.divider()
+st.subheader("📋 Prediction History")
+
+if st.session_state.prediction_history:
+    history_df = pd.DataFrame(
+        st.session_state.prediction_history
+    )
+
+    st.dataframe(
+        history_df,
+        use_container_width=True,
+        hide_index=True
+    )
+
+    if st.button("Clear Prediction History"):
+        st.session_state.prediction_history = []
+        st.rerun()
+else:
+    st.info(
+        "Your predictions will appear here after you make one."
+    )
