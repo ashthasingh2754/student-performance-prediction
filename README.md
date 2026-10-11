@@ -88,7 +88,6 @@ student-performance-prediction/
 └── .gitignore
 ```
 
-*The structure above is illustrative. Keep only the files that actually exist in your repository.*
 
 ## Future Improvements
 
