@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -137,6 +138,29 @@ with st.expander("What do these metrics mean?"):
         "grades the model explains on the test set. A value "
         "closer to 1 generally indicates a better fit."
     )
+
+# Model performance visualization
+st.subheader("📈 Model Error Comparison")
+
+chart_data = pd.DataFrame({
+    "Metric": ["MAE", "RMSE"],
+    "Error": [metrics["MAE"], metrics["RMSE"]]
+})
+
+fig, ax = plt.subplots(figsize=(7, 4))
+
+bars = ax.bar(
+    chart_data["Metric"],
+    chart_data["Error"]
+)
+
+ax.set_title("Random Forest Model Error")
+ax.set_ylabel("Error in Grade Points")
+ax.bar_label(bars, fmt="%.2f", padding=3)
+
+fig.tight_layout()
+st.pyplot(fig)
+plt.close(fig)
 
 st.divider()
 
