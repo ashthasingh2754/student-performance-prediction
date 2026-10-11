@@ -1,19 +1,20 @@
 # Student Performance Prediction
 
-A machine learning project that predicts a student's final academic grade using student performance data.
+A machine learning project that predicts students' final academic grades using student performance data. It includes model comparison, performance evaluation, data visualization, and an interactive Streamlit web application.
 
 ## Project Overview
 
-This project uses the UCI Student Performance dataset containing information about 395 students.
+This project uses the UCI Student Performance dataset containing information about 395 students. Machine learning models are trained to predict the final grade (G3).
 
-A Linear Regression model is trained to predict the final grade (G3) using:
-
+### Input Features
 - Age
 - Study time
 - Previous failures
 - Number of absences
 - First period grade (G1)
 - Second period grade (G2)
+
+**Target Variable:** Final grade (G3)
 
 ## Technologies Used
 
@@ -23,28 +24,20 @@ A Linear Regression model is trained to predict the final grade (G3) using:
 - Scikit-learn
 - Matplotlib
 - Seaborn
-- Git & GitHub
+- Streamlit
+- Git and GitHub
 
-## Project Structure
+## Features
 
-```text
-student-performance-prediction/
-│
-├── dataset/
-│   ├── student_data.csv
-│   └── student-mat.csv
-│
-├── train_model.py
-├── visualize.py
-├── predict.py
-├── README.md
-├── requirements.txt
-└── .gitignore
-```
+- Predict student final grades using machine learning.
+- Enter student information through an interactive Streamlit web app.
+- Compare Linear Regression, Decision Tree, and Random Forest models.
+- Evaluate model performance using MAE, RMSE, and R².
+- Visualize student data and model performance.
 
 ## Machine Learning Model Comparison
 
-Three machine learning algorithms were evaluated using the same training and testing data.
+The following results are from the model comparison performed in this project. Verify that these values match your actual evaluation output before publishing them.
 
 | Model | MAE | MSE | R² Score |
 |---|---:|---:|---:|
@@ -52,12 +45,53 @@ Three machine learning algorithms were evaluated using the same training and tes
 | Decision Tree | 1.18 | 4.25 | 0.79 |
 | Random Forest | 1.06 | 2.92 | 0.86 |
 
-**Best Model: Random Forest**
+**Best Model:** Random Forest, based on the results shown above.
 
-Random Forest achieved the lowest MAE (1.06) and highest R² score (0.86) among the three tested models.
+## Performance Metrics
 
-### Model Comparison Graph
+- **MAE (Mean Absolute Error):** Average absolute difference between actual and predicted scores.
+- **RMSE (Root Mean Squared Error):** Square root of the mean squared prediction error. Lower values indicate smaller prediction errors.
+- **R² Score:** Measures how much variation in the target scores is explained by the model. A score closer to 1 generally indicates a better fit.
 
-![Model Comparison Graph](./model_comparison.png)
+## How to Run the Streamlit App
 
+1. Clone the repository.
+2. Install the dependencies:
 
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Start the application:
+
+   ```bash
+   python -m streamlit run app.py
+   ```
+
+4. Open the local URL displayed in the terminal.
+5. Enter the student details and view the predicted final grade.
+
+## Project Structure
+
+```text
+student-performance-prediction/
+├── dataset/
+│   ├── student_data.csv
+│   └── student-mat.csv
+├── app.py
+├── train_model.py
+├── visualize.py
+├── predict.py
+├── model_comparison.png
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+*The structure above is illustrative. Keep only the files that actually exist in your repository.*
+
+## Future Improvements
+
+- Improve prediction accuracy through hyperparameter tuning.
+- Add more relevant student features.
+- Deploy the Streamlit app online.
